@@ -258,6 +258,7 @@ body {
   height: 57px;
   display: flex;
   justify-content: space-between;
+  background-color: hsl(223, 64%, 98%);
 }
 .input__minus {
   width: 25px;
@@ -284,6 +285,11 @@ body {
 }
 .input__plus:hover {
   cursor: pointer;
+}
+
+.cart-modal {
+  border: 1px solid blue;
+  width: 360px;
 }
 
 .main-container {
