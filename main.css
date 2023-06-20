@@ -497,4 +497,15 @@ body {
   }
 }
 
+.show {
+  display: block;
+}
+
+.cart-empty {
+  font-weight: 700;
+  text-align: center;
+  margin-top: 30px;
+  color: hsla(0, 0%, 0%, 0.5);
+}
+
 /*# sourceMappingURL=main.css.map */
