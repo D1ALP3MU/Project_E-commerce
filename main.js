@@ -32,21 +32,101 @@ addToCartBtn.addEventListener('click', ()=> {
     cartNotification.innerText = lastValue;
     cartNotification.style.display = 'block';
     drawProductInModal();
-    priceModal.innerHTML = `$125 x${lastValue} <span>${lastValue*125}.00</span>`;
 });
 
 // Mostrar el modal con el detalle del carrito
 const cartIconBtn = document.querySelector('.header__cart');
 const cartModal = document.querySelector('.cart-modal');
-let priceModal = document.querySelector('.cart-modal__price');
+// let priceModal = document.querySelector('.cart-modal__price');
 const productContainer = document.querySelector('.cart-modal__checkout-container');
 
 cartIconBtn.addEventListener('click', ()=> {
     cartModal.classList.toggle('show');
 
-    if(lastValue == 0){
+    if(lastValue === 0){
+        productContainer.innerHTML = '<p class="cart-empty">Your cart is empty!</p>';
+    } else {
         drawProductInModal();
     }
+});
+
+// Cambiar imágenes cuando se presione los botones flecha
+const imageContainer = document.querySelector('.gallery__image-container');
+const previousGalleryBtn = document.querySelector('.gallery__previous');
+const nextGalleryBtn = document.querySelector('.gallery__next');
+let imgIndex = 1;
+
+const imagesUrls = [
+    '../images/image-product-1.jpg',
+    '../images/image-product-2.jpg',
+    '../images/image-product-3.jpg',
+    '../images/image-product-4.jpg'
+]
+
+nextGalleryBtn.addEventListener('click', ()=> {
+    changeNextImage(imageContainer);
+});
+
+previousGalleryBtn.addEventListener('click', ()=> {
+    changePreviousImage(imageContainer);
+});
+
+// Mostrar el modal de imágenes cuando hago click en la imagen principal.
+const imagesModal = document.querySelector('.modal-gallery__background');
+const closeModalBtn = document.querySelector('.modal-gallery__close');
+
+imageContainer.addEventListener('click', ()=> {
+    imagesModal.style.display = 'grid';
+});
+
+closeModalBtn.addEventListener('click', ()=> {
+    imagesModal.style.display = 'none';
+});
+
+// Cambiar las imágenes principales desde los thumbnails
+let thumbnails = document.querySelectorAll('.gallery__thumnail');
+thumbnails = [...thumbnails];
+
+thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', event => {
+        imageContainer.style.backgroundImage = `url('../images/image-product-${event.target.id}.jpg')`;
+    });
+});
+
+// Cambiar las imágenes principales desde los thumbnails en el modal
+let modalThumbnails = document.querySelectorAll('.modal-gallery__thumnail');
+const modalImageContainer = document.querySelector('.modal-gallery__image-container');
+modalThumbnails = [...modalThumbnails];
+
+modalThumbnails.forEach(modalThumbnail => {
+    modalThumbnail.addEventListener('click', event => {
+        modalImageContainer.style.backgroundImage = `url('../images/image-product-${event.target.id.slice(-1)}.jpg')`;
+    });
+});
+
+// Cambiar imagen principal del modal desde las flechas del modal
+const previousModalBtn = document.querySelector('.modal-gallery__previous');
+const nextModalBtn = document.querySelector('.modal-gallery__next');
+
+nextModalBtn.addEventListener('click', ()=> {
+    changeNextImage(modalImageContainer);
+});
+
+previousModalBtn.addEventListener('click', ()=> {
+    changePreviousImage(modalImageContainer);
+});
+
+// Mostrar el navbar cuando presiono el menú de hamburguesa
+const menuHambuerguesa = document.querySelector('.header__menu');
+const modalNavbar = document.querySelector('.modal-navbar__background');
+const closeModalNavbar = document.querySelector('.modal-navbar__close-icon');
+
+menuHambuerguesa.addEventListener('click', ()=> {
+    modalNavbar.style.display = 'block';
+});
+
+closeModalNavbar.addEventListener('click', ()=> {
+    modalNavbar.style.display = 'none';
 });
 
 
@@ -74,4 +154,24 @@ function drawProductInModal() {
         </div>
         <button class="cart-modal__checkout">Checkout</button>`
     deleteProduct();
+    let priceModal = document.querySelector('.cart-modal__price');
+    priceModal.innerHTML = `$125 x${lastValue} <span>${lastValue*125}.00</span>`;
+}
+
+function changeNextImage(imgContainer){
+    if (imgIndex === 4) {
+        imgIndex = 1;
+    } else {
+        imgIndex++;
+    }
+    imgContainer.style.backgroundImage = `url('../images/image-product-${imgIndex}.jpg')`;
+}
+
+function changePreviousImage(imgContainer){
+    if (imgIndex === 1) {
+        imgIndex = 4;
+    } else {
+        imgIndex--;
+    }
+    imgContainer.style.backgroundImage = `url('../images/image-product-${imgIndex}.jpg')`;
 }

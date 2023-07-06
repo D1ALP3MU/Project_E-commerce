@@ -116,7 +116,6 @@ body {
   width: 250px;
   height: 100%;
   padding: 28px 24px;
-  display: none;
 }
 .modal-navbar__background {
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -127,6 +126,7 @@ body {
   height: 100%;
   z-index: 1;
   display: none;
+  overflow: hidden;
 }
 .modal-navbar__items {
   display: flex;
@@ -142,8 +142,13 @@ body {
   font-weight: 700;
   font-size: 1.1em;
 }
+.modal-navbar__link:hover {
+  cursor: pointer;
+  border-bottom: 4px solid hsl(26, 100%, 55%);
+}
 .modal-navbar__close-icon:hover {
   cursor: pointer;
+  content: url("../images/icon-close-orange.svg");
 }
 
 .gallery__image-container {
@@ -152,6 +157,9 @@ body {
   background-image: url(../images/image-product-1.jpg);
   background-position-y: -35px;
   background-size: cover;
+}
+.gallery__image-container:hover {
+  cursor: pointer;
 }
 .gallery__previous {
   background-color: hsl(0, 0%, 100%);
@@ -405,6 +413,7 @@ body {
   height: 100%;
   z-index: 1;
   display: none;
+  overflow: hidden;
   display: none;
   place-content: center;
 }

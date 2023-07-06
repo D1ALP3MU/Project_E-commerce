@@ -9,7 +9,7 @@
     width: 250px;
     height: 100%;
     padding: 28px 24px;
-    display: none;
+    // display: none;
     &__items{
         display: flex;
         flex-direction: column;
@@ -23,8 +23,14 @@
         color: variables.$Very-dark-blue;
         font-weight: 700;
         font-size: 1.1em;
+        &:hover{
+            cursor: pointer;
+            // color: variables.$Orange;
+            border-bottom: 4px solid variables.$Orange;
+        }
     }
     &__close-icon:hover{
         cursor: pointer;
+        content: url('../images/icon-close-orange.svg');
     }
 }
